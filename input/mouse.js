@@ -9,7 +9,7 @@ function handleMouseMove(evt) {
 function handleMouseDown(evt) {
   // Get current position of mouse
   handleMouseMove(evt);
-  //Properties set and check which buttons are pressed
+  // Properties set and check which buttons are pressed
   if (evt.which === 1) {
     if (!Mouse.left.down)
       Mouse.left.pressed = true;
@@ -24,6 +24,18 @@ function handleMouseDown(evt) {
     Mouse.right.down = true;
   }
 
+}
+
+function handleMouseUp(evt) {
+  // Get current position of mouse
+  handleMouseMove(evt);
+  // Check Attribute which button is released
+  if (evt.which === 1)
+    Mouse.left.down = false;
+  else if (evt.which === 2)
+    Mouse.middle.down = false;
+  else if (evt.which === 3)
+    Mouse.right.down = false;
 }
 
 // Create mouse handler
