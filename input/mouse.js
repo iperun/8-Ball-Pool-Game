@@ -51,5 +51,14 @@ function MouseHandler() {
   document.onmousedown = handleMouseDown;
   document.onmouseup = handleMouseUp;
 }
+// Option to reset mouse input
+MouseHandler.prototype.reset = function() {
+
+  this.left.pressed = false;
+  this.middle.pressed = false;
+  this.right.pressed = false;
+}
+
+
 // Create mouse object
 let Mouse = new MouseHandler();

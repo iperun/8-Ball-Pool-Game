@@ -22,6 +22,8 @@ Game.prototype.mainLoop = function() {
   PoolGame.gameWorld.update();
   // Draw game game world
   PoolGame.gameWorld.draw();
+  // Reset Mouse input
+  Mouse.reset();
 
   requestAnimationFrame(PoolGame.mainLoop);
 

@@ -6,10 +6,12 @@ function Stick() {
 }
 
 Stick.prototype.update = function() {
+  // Testing stick object
+  this.position = Mouse.position;
 
-/*Testing stick object
-  this.position.x++; */
-
+  if (Mouse.left.pressed) {
+    console.log("pressed left");
+  }
 }
 
 Stick.prototype.draw = function() {
