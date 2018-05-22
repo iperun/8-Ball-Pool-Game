@@ -9,8 +9,9 @@ Game.prototype.init = function() {
 // Start the Game
 Game.prototype.start = function() {
 
-  this.init();
-  this.mainLoop();
+  PoolGame.init();
+
+  PoolGame.mainLoop();
 
 }
 // Start assets
@@ -22,7 +23,7 @@ Game.prototype.mainLoop = function() {
   // Draw game game world
   PoolGame.gameWorld.draw();
 
-  requestsAnimationFrame(PoolGame.mainLoop);
+  requestAnimationFrame(PoolGame.mainLoop);
 
 }
 

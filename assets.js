@@ -3,10 +3,10 @@ let sprites = {};
 let assetsStillLoading = 0;
 
 // Validate all images are loaded
-funtion assetsLoadingLoop(callback) {
+function assetsLoadingLoop(callback) {
 
   if (assetsStillLoading) {
-    requestsAnimationFrame(assetsLoadingLoop.bind(this, callback));
+    requestAnimationFrame(assetsLoadingLoop.bind(this, callback));
   } else {
     callback();
   }
@@ -20,9 +20,9 @@ function loadAssets(callback) {
     assetsStillLoading++;
 
     let spriteImage = new Image();
-    spriteImage.src = "./assets/sprite/" + fileName;
+    spriteImage.src = "./assets/sprites/" + fileName;
     // Once image is done loading, Decease number of assets loading
-    spriteImage.onload = funtion() {
+    spriteImage.onload = function() {
       assetsStillLoading--;
     }
 
