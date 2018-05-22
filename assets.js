@@ -2,7 +2,8 @@
 let sprites = {};
 let assetsStillLoading = 0;
 
-funtion assetsLoadingLoop(calback) {
+// Validate all images are loaded
+funtion assetsLoadingLoop(callback) {
 
   if (assetsStillLoading) {
     requestsAnimationFrame(assetsLoadingLoop.bind(this, callback));
@@ -14,21 +15,21 @@ funtion assetsLoadingLoop(calback) {
 
 // Once assets finish loading, activates
 function loadAssets(callback) {
-  // Increase number of assts loading
+  // Increase number of assets loading
   function loadSprite(fileName) {
     assetsStillLoading++;
 
     let spriteImage = new Image();
     spriteImage.src = "./assets/sprite/" + fileName;
-    // Decease number of assets loading
+    // Once image is done loading, Decease number of assets loading
     spriteImage.onload = funtion() {
       assetsStillLoading--;
     }
 
     return spriteImage;
   }
-  sprites.background = loadSprite('spr_background5');
+  sprites.background = loadSprite('spr_background5.png');
   sprites.stick = loadSprite('spr_stick.png');
 
-  assetsLoadingLopp(callback);
+  assetsLoadingLoop(callback);
 }
