@@ -26,8 +26,21 @@ function GameWorld() {
     new Vector2(413, 413),
     this.whiteBall.shoot.bind(this.whiteBall));
 }
+// Collision handling
+GameWorld.prototype.handleCollisions = function() {
+  for (let i = 0; i < this.balls.length; i++) {
+    for (let j = i + 1; j < this.balls.length; j++) {
+      const firstBall = this.balls[i];
+      const secondBall = this.balls[j];
+      firstBall.collideWith(secondBall);
+    }
+  }
+}
+
 // Updates objects in the Game
 GameWorld.prototype.update = function() {
+
+  this.handleCollisions();
 
   this.stick.update();
 
@@ -58,5 +71,14 @@ GameWorld.prototype.draw = function() {
 }
 
 GameWorld.prototype.ballsMoving = function() {
-  return this.whiteBall.moving;
+
+  let ballsMoving = false;
+
+  for (let i = 0; i < this.balls.length; i++) {
+    if (this.balls[i].moving) {
+      ballsMoving = true;
+      break;
+    }
+  }
+  return ballsMoving;
 }
