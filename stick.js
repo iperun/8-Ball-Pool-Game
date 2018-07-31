@@ -13,6 +13,10 @@ function Stick(position, onShoot) {
 
 Stick.prototype.update = function() {
 
+  if (this.shot) {
+    return;
+  }
+
   if (Mouse.left.down) {
     this.increasePower();
   } else if (this.power > 0) {
@@ -40,7 +44,7 @@ Stick.prototype.updateRotation = function() {
 }
 
 Stick.prototype.increasePower = function() {
-  if(this.power > MAX_POWER){
+  if (this.power > MAX_POWER) {
     return;
   }
   this.power += 120;
@@ -55,7 +59,7 @@ Stick.prototype.shoot = function() {
   this.shot = true;
 }
 
-Stick.prototype.reposition = function(position){
+Stick.prototype.reposition = function(position) {
 
   this.position = position.copy();
   this.origin = STICK_ORIGIN.copy();
