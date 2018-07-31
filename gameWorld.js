@@ -1,26 +1,30 @@
-const DELTA = 1 / 177;
-// Contains physical objects of game
-function GameWorld() {
-  // create the ball objects
-  this.balls = CONSTANTS.ballsParams.map(params => new Ball(...params));
+function GameWorld(){
 
-  this.whiteBall = this.balls[this.balls.length - 1];
-  this.stick = new Stick(
-    new Vector2(413, 413),
-    this.whiteBall.shoot.bind(this.whiteBall)
-  );
+    this.balls = CONSTANTS.ballsParams.map(params => new Ball(...params));
 
-  this.table = {
-    TopY: 57,
-    RightX: 1443,
-    BottomY: 768,
-    LeftX: 57
-  }
+    this.whiteBall = this.balls.find(ball => ball.color === COLOR.WHITE);
+
+    this.stick = new Stick(
+        this.whiteBall.position.copy(),
+        this.whiteBall.shoot.bind(this.whiteBall)
+    );
+
+    this.table = {
+        TopY: 57,
+        RightX: 1443,
+        BottomY: 768,
+        LeftX: 57
+    }
+
 }
+
 // Collision handling
 GameWorld.prototype.handleCollisions = function() {
   for (let i = 0; i < this.balls.length; i++) {
+
+    this.balls[i].handleBallInPocket();
     this.balls[i].collideWithTable(this.table);
+
     for (let j = i + 1; j < this.balls.length; j++) {
       const firstBall = this.balls[i];
       const secondBall = this.balls[j];
@@ -37,7 +41,7 @@ GameWorld.prototype.update = function() {
   this.stick.update();
 
   for (let i = 0; i < this.balls.length; i++) {
-    this.balls[i].update(DELTA);
+    this.balls[i].update(CONSTANTS.delta);
   }
 
   if (!this.ballsMoving() && this.stick.shot) {
@@ -47,19 +51,15 @@ GameWorld.prototype.update = function() {
 }
 
 // Draws objects in Game
-GameWorld.prototype.draw = function() {
+GameWorld.prototype.draw = function(){
 
-  Canvas.drawImage(sprites.background, {
-    x: 0,
-    y: 0
-  });
+    Canvas.drawImage(sprites.background, new Vector2());
 
-  for (let i = 0; i < this.balls.length; i++) {
-    this.balls[i].draw();
-  }
+    for(let i = 0 ; i < this.balls.length ; i++){
+        this.balls[i].draw();
+    }
 
-  this.stick.draw();
-
+    this.stick.draw();
 }
 
 GameWorld.prototype.ballsMoving = function() {
